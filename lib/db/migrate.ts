@@ -4,8 +4,10 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import postgres from 'postgres';
 
 // Load environment variables from multiple possible locations
-config({ path: '.env.local' });
-config({ path: '.env' });
+if (process.env.NODE_ENV !== 'production') {
+  config({ path: '.env.local' });
+  config({ path: '.env' });
+}
 
 const runMigrate = async () => {
   console.log('Environment check:');
@@ -22,8 +24,9 @@ const runMigrate = async () => {
   try {
     const connection = postgres(process.env.POSTGRES_URL, { 
       max: 1,
-      connect_timeout: 10,
-      idle_timeout: 10
+      connect_timeout: 30,
+      idle_timeout: 30,
+      ssl: process.env.NODE_ENV === 'production'
     });
 
     // Test the connection
