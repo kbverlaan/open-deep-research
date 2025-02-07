@@ -1,16 +1,11 @@
-import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   experimental: {
     ppr: true,
   },
-  images: {
-    remotePatterns: [
-      {
-        hostname: 'avatar.vercel.sh',
-      },
-    ],
+  serverRuntimeConfig: {
+    maxDuration: 60, // Set max duration to 60 seconds for hobby plan
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

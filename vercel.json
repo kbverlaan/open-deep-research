@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "app/(chat)/api/**/*": {
+      "maxDuration": 10
+    }
+  },
+  "regions": ["fra1"]
+}
