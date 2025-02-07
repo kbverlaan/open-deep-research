@@ -2,7 +2,10 @@ services:
   - type: web
     name: open-deep-research
     env: node
-    buildCommand: pnpm install && pnpm build
+    buildCommand: |
+      npm i -g pnpm
+      pnpm install
+      pnpm build
     startCommand: pnpm start
     envVars:
       - key: NODE_ENV
@@ -13,6 +16,8 @@ services:
         sync: false
       - key: AUTH_SECRET
         sync: false
+      - key: BYPASS_JSON_VALIDATION
+        value: "false"
       - key: POSTGRES_URL
         fromDatabase:
           name: open-deep-research-db
@@ -22,3 +27,4 @@ databases:
   - name: open-deep-research-db
     databaseName: open_deep_research
     plan: free
+    ipAllowList: []
