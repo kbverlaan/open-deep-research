@@ -7,10 +7,12 @@ services:
       pnpm install
       pnpm db:migrate
       pnpm build
-    startCommand: pnpm start
+    startCommand: PORT=3000 pnpm start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "3000"
       - key: OPENROUTER_API_KEY
         sync: false
       - key: FIRECRAWL_API_KEY
@@ -23,6 +25,11 @@ services:
           property: connectionString
       - key: BYPASS_JSON_VALIDATION
         value: "false"
+      - key: NEXTAUTH_URL
+       value: "https://open-deep-research-rl8o.onrender.com"
+      - key: NEXTAUTH_SECRET
+        sync: false
+    port: 3000
 
 databases:
   - name: open-deep-research-db
