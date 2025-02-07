@@ -13,6 +13,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "10000"
       - key: OPENROUTER_API_KEY
         sync: false
       - key: FIRECRAWL_API_KEY
@@ -27,6 +29,7 @@ services:
           property: connectionString
     healthCheckPath: /
     autoDeploy: true
+    port: 10000
 
 databases:
   - name: open-deep-research-db
