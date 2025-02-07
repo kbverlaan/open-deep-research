@@ -5,14 +5,11 @@ services:
     region: frankfurt
     buildCommand: |
       echo "Node version: $(node -v)"
-      echo "Current directory: $(pwd)"
       npm i -g pnpm
       pnpm install
+      pnpm db:migrate
       pnpm build
-    startCommand: |
-      echo "Starting server with NODE_ENV=$NODE_ENV"
-      echo "Database URL available: $(test -n "$POSTGRES_URL" && echo "yes" || echo "no")"
-      pnpm start
+    startCommand: pnpm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -28,6 +25,8 @@ services:
         fromDatabase:
           name: open-deep-research-db
           property: connectionString
+    healthCheckPath: /
+    autoDeploy: true
 
 databases:
   - name: open-deep-research-db
