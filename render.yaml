@@ -2,9 +2,7 @@ services:
   - type: web
     name: open-deep-research
     env: node
-    region: frankfurt
     buildCommand: |
-      echo "Node version: $(node -v)"
       npm i -g pnpm
       pnpm install
       pnpm db:migrate
@@ -13,23 +11,18 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: "10000"
       - key: OPENROUTER_API_KEY
         sync: false
       - key: FIRECRAWL_API_KEY
         sync: false
       - key: AUTH_SECRET
         sync: false
-      - key: BYPASS_JSON_VALIDATION
-        value: "false"
       - key: POSTGRES_URL
         fromDatabase:
           name: open-deep-research-db
           property: connectionString
-    healthCheckPath: /
-    autoDeploy: true
-    port: 10000
+      - key: BYPASS_JSON_VALIDATION
+        value: "false"
 
 databases:
   - name: open-deep-research-db
