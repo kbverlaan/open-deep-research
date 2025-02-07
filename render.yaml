@@ -26,9 +26,13 @@ services:
       - key: BYPASS_JSON_VALIDATION
         value: "false"
       - key: NEXTAUTH_URL
-       value: "https://open-deep-research-rl8o.onrender.com"
+         value: "https://open-deep-research-rl8o.onrender.com"
+      - key: NEXTAUTH_URL_INTERNAL
+         value: "https://open-deep-research-rl8o.onrender.com"
+      - key: RENDER_EXTERNAL_URL
+         value: "https://open-deep-research-rl8o.onrender.com"
       - key: NEXTAUTH_SECRET
-        sync: false
+         sync: false
     port: 3000
 
 databases:
