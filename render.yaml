@@ -2,11 +2,17 @@ services:
   - type: web
     name: open-deep-research
     env: node
+    region: frankfurt
     buildCommand: |
+      echo "Node version: $(node -v)"
+      echo "Current directory: $(pwd)"
       npm i -g pnpm
       pnpm install
       pnpm build
-    startCommand: pnpm start
+    startCommand: |
+      echo "Starting server with NODE_ENV=$NODE_ENV"
+      echo "Database URL available: $(test -n "$POSTGRES_URL" && echo "yes" || echo "no")"
+      pnpm start
     envVars:
       - key: NODE_ENV
         value: production

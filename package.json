@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "start": "pnpm db:migrate && next start",
+    "start": "NODE_ENV=production node -e \"console.log('Starting migration...'); require('tsx').run('./lib/db/migrate.ts').then(() => { console.log('Migration complete, starting server...'); require('next').default.startServer({ dir: '.', port: process.env.PORT || 3000 }); }).catch(err => { console.error('Error:', err); process.exit(1); })\"",
     "lint": "next lint && biome lint --write --unsafe",
     "lint:fix": "next lint --fix && biome lint --write --unsafe",
     "format": "biome format --write",
